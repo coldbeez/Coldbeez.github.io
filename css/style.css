@@ -175,14 +175,6 @@ nav a:hover::after {
   text-align: center;
 }
 
-/* Logo besar */
-.logo {
-  font-size: 64px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
-
 /* ===== GALAXY CARD ===== */
 .home-cards {
   display: flex;
@@ -234,18 +226,23 @@ body {
   background-attachment: fixed;
 }
 
-/* ===== LOGO GLOW ===== */
+/* ===== LOGO BESAR ===== */
 .logo {
-  font-size: 72px;
-  font-weight: bold;
-  letter-spacing: 3px;
+  font-family: "Press Start 2P", system-ui;
+
+  font-size: 56px;
+  font-weight: 400;
+  letter-spacing: 2px;
+
   background: linear-gradient(90deg, #8ec5fc, #e0c3fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
   text-shadow:
-    0 0 20px rgba(142, 197, 252, 0.3),
-    0 0 40px rgba(224, 195, 252, 0.2);
+    0 0 12px rgba(142, 197, 252, 0.4),
+    0 0 24px rgba(224, 195, 252, 0.25);
 }
+
 
 .home-card {
   cursor: pointer;
