@@ -262,3 +262,60 @@ body {
     transform: translateY(0);
   }
 }
+
+/* ===== ANIME PAGE ===== */
+.anime-title {
+  font-size: 32px;
+  margin-bottom: 5px;
+}
+
+.anime-subtitle {
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+/* Grid */
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 24px;
+}
+
+/* Card */
+.anime-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  background: #111;
+  transition: transform 0.3s;
+}
+
+.anime-card img {
+  width: 100%;
+  display: block;
+}
+
+/* Hover zoom */
+.anime-card:hover {
+  transform: scale(1.06);
+}
+
+/* Info overlay */
+.anime-info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.8),
+    rgba(0,0,0,0)
+  );
+}
+
+.anime-info h3 {
+  font-size: 14px;
+  margin: 0;
+  color: white;
+}
