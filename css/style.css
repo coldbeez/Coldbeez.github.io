@@ -319,3 +319,7 @@ body {
   margin: 0;
   color: white;
 }
+
+.anime-card:hover img {
+  filter: brightness(1.1);
+}
