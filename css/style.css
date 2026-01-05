@@ -414,3 +414,74 @@ body {
   font-size: 48px;
   color: #8ec5fc;
 }
+
+/* ===== MODAL ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #0b0f1a;
+  padding: 25px;
+  width: 320px;
+  border-radius: 12px;
+  color: white;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0 12px;
+  background: #111;
+  border: 1px solid #333;
+  color: white;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.modal-actions button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+#cancelBtn {
+  background: #444;
+  color: white;
+}
+
+#saveBtn {
+  background: #4da3ff;
+  color: black;
+}
+
+/* ===== STARS ===== */
+.stars {
+  display: flex;
+  gap: 4px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.star {
+  color: #444;
+}
+
+.star.active {
+  color: gold;
+}
