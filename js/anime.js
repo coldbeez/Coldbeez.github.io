@@ -79,13 +79,25 @@ saveBtn.addEventListener("click", () => {
 
 /* ===== MENU ⋮ (EVENT DELEGATION) ===== */
 document.addEventListener("click", e => {
-  if (e.target.classList.contains("card-menu")) {
-    e.stopPropagation();
-    const menu = e.target.nextElementSibling.nextElementSibling;
-    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-  } else {
+  const menuBtn = e.target.closest(".card-menu");
+
+  if (!menuBtn) {
     document.querySelectorAll(".menu-dropdown").forEach(m => {
       m.style.display = "none";
     });
+    return;
   }
+
+  e.stopPropagation();
+
+  const card = menuBtn.closest(".anime-card");
+  const dropdown = card.querySelector(".menu-dropdown");
+
+  document.querySelectorAll(".menu-dropdown").forEach(m => {
+    if (m !== dropdown) m.style.display = "none";
+  });
+
+  dropdown.style.display =
+    dropdown.style.display === "flex" ? "none" : "flex";
 });
+
