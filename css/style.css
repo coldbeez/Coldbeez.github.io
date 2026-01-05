@@ -122,3 +122,27 @@ nav a::after {
 nav a:hover::after {
   width: 100%;
 }
+
+/* ===== HOME ===== */
+.subtitle {
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.home-card {
+  background: #141414;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #222;
+  transition: transform 0.3s;
+}
+
+.home-card:hover {
+  transform: translateY(-5px);
+}
