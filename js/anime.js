@@ -1,10 +1,59 @@
 const grid = document.getElementById("animeGrid");
 const addBtn = document.getElementById("addAnime");
 
-// ===== ADD CARD =====
+const modal = document.getElementById("animeModal");
+const titleInput = document.getElementById("animeTitle");
+const starContainer = document.getElementById("starRating");
+const ratingText = document.getElementById("ratingValue");
+
+const cancelBtn = document.getElementById("cancelBtn");
+const saveBtn = document.getElementById("saveBtn");
+
+let currentRating = 0;
+
+/* ===== OPEN MODAL ===== */
 addBtn.addEventListener("click", () => {
-  const title = prompt("Judul anime?");
-  if (!title) return;
+  modal.classList.remove("hidden");
+  titleInput.value = "";
+  currentRating = 0;
+  updateStars();
+});
+
+/* ===== CLOSE MODAL ===== */
+cancelBtn.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
+
+/* ===== CREATE STARS (1–10, HALF) ===== */
+for (let i = 1; i <= 10; i++) {
+  const star = document.createElement("span");
+  star.classList.add("star");
+  star.innerHTML = "★";
+  star.dataset.value = i;
+
+  star.addEventListener("click", e => {
+    const rect = star.getBoundingClientRect();
+    const half = e.clientX - rect.left < rect.width / 2;
+    currentRating = half ? i - 0.5 : i;
+    updateStars();
+  });
+
+  starContainer.appendChild(star);
+}
+
+/* ===== UPDATE STAR UI ===== */
+function updateStars() {
+  document.querySelectorAll(".star").forEach(star => {
+    const value = Number(star.dataset.value);
+    star.classList.toggle("active", value <= currentRating);
+  });
+  ratingText.textContent = `Rating: ${currentRating}`;
+}
+
+/* ===== SAVE CARD ===== */
+saveBtn.addEventListener("click", () => {
+  const title = titleInput.value.trim();
+  if (!title || currentRating === 0) return;
 
   const cardHTML = `
     <div class="anime-card">
@@ -14,6 +63,7 @@ addBtn.addEventListener("click", () => {
 
       <div class="card-body">
         <h3>${title}</h3>
+        <p>⭐ ${currentRating}</p>
       </div>
 
       <div class="menu-dropdown">
@@ -24,21 +74,18 @@ addBtn.addEventListener("click", () => {
   `;
 
   grid.insertAdjacentHTML("beforeend", cardHTML);
+  modal.classList.add("hidden");
 });
 
+/* ===== MENU ⋮ (EVENT DELEGATION) ===== */
 document.addEventListener("click", e => {
-  const menu = e.target.closest(".card-menu");
-  if (!menu) return;
-
-  e.stopPropagation();
-  const dropdown = menu.parentElement.querySelector(".menu-dropdown");
-  dropdown.style.display =
-    dropdown.style.display === "flex" ? "none" : "flex";
-});
-
-// Tutup menu kalau klik di luar
-document.addEventListener("click", () => {
-  document.querySelectorAll(".menu-dropdown").forEach(m => {
-    m.style.display = "none";
-  });
+  if (e.target.classList.contains("card-menu")) {
+    e.stopPropagation();
+    const menu = e.target.nextElementSibling.nextElementSibling;
+    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+  } else {
+    document.querySelectorAll(".menu-dropdown").forEach(m => {
+      m.style.display = "none";
+    });
+  }
 });
