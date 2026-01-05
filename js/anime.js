@@ -59,7 +59,7 @@ saveBtn.addEventListener("click", () => {
     <div class="anime-card">
       <div class="card-menu">⋮</div>
 
-      <img src="images/placeholder.jpg">
+      <img src="images/anime/placeholder.jpg">
 
       <div class="card-body">
         <h3>${title}</h3>
