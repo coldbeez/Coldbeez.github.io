@@ -62,3 +62,38 @@ h1, h2 {
   font-size: 14px;
   text-align: center;
 }
+
+/* ===== CODING TECH STYLE ===== */
+.coding h1 {
+  color: #4fc3f7;
+}
+
+.code-card {
+  background: #0a192f;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #1e3a5f;
+  max-width: 600px;
+}
+
+pre {
+  background: #020c1b;
+  color: #64ffda;
+  padding: 15px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+button {
+  background: #4fc3f7;
+  color: black;
+  border: none;
+  padding: 8px 14px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: #81d4fa;
+}
