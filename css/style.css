@@ -33,3 +33,32 @@ h1, h2 {
 .container {
   padding: 20px;
 }
+
+/* ===== ANIME GRID ===== */
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.anime-card {
+  text-decoration: none;
+  color: white;
+}
+
+.anime-card img {
+  width: 100%;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.anime-card img:hover {
+  transform: scale(1.05);
+}
+
+.anime-card p {
+  margin-top: 8px;
+  font-size: 14px;
+  text-align: center;
+}
