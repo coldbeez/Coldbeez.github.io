@@ -211,12 +211,38 @@ nav a:hover::after {
 /* Galaxy effect */
 .galaxy {
   background:
-    radial-gradient(circle at top, #2a2a72, transparent 60%),
-    radial-gradient(circle at bottom, #000428, #000);
+    radial-gradient(circle at top left, rgba(138,43,226,0.4), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(0,191,255,0.3), transparent 60%),
+    linear-gradient(135deg, #0a0f2c, #050510);
 }
 
 /* Hover effect */
 .home-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 0 25px rgba(79, 195, 247, 0.3);
+  box-shadow:
+    0 0 30px rgba(138, 43, 226, 0.35),
+    0 0 60px rgba(0, 191, 255, 0.15);
+}
+
+/* ===== GALAXY BACKGROUND ===== */
+body {
+  background:
+    radial-gradient(circle at 20% 20%, #2b1055, transparent 40%),
+    radial-gradient(circle at 80% 30%, #0f3460, transparent 40%),
+    radial-gradient(circle at 50% 80%, #000428, transparent 50%),
+    linear-gradient(180deg, #020111, #000000);
+  background-attachment: fixed;
+}
+
+/* ===== LOGO GLOW ===== */
+.logo {
+  font-size: 72px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, #8ec5fc, #e0c3fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 20px rgba(142, 197, 252, 0.3),
+    0 0 40px rgba(224, 195, 252, 0.2);
 }
