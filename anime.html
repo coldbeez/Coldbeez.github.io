@@ -17,23 +17,31 @@
   <h1 class="anime-title">Anime Library</h1>
   <p class="anime-subtitle">Anime yang sudah aku tonton (link legal)</p>
 
-  <div class="anime-grid">
+  <div class="anime-grid" id="animeGrid">
 
-    <!-- CARD 1 -->
-    <a class="anime-card" href="https://www.crunchyroll.com" target="_blank">
-      <img src="https://via.placeholder.com/300x420">
-      <div class="anime-info">
-        <h3>Anime Title</h3>
-      </div>
-    </a>
+  <!-- CARD ANIME -->
+  <div class="anime-card">
+    <div class="card-menu">⋮</div>
 
-    <!-- CARD 2 -->
-    <a class="anime-card" href="https://www.netflix.com" target="_blank">
-      <img src="https://via.placeholder.com/300x420">
-      <div class="anime-info">
-        <h3>Another Anime</h3>
-      </div>
-    </a>
+    <img src="https://via.placeholder.com/300x420" alt="Anime">
+
+    <div class="card-body">
+      <h3>Anime Title</h3>
+      <div class="rating" data-rating="8.5"></div>
+    </div>
+
+    <div class="menu-dropdown">
+      <button>Edit</button>
+      <button class="danger">Hapus</button>
+    </div>
+  </div>
+
+  <!-- ADD CARD -->
+  <div class="anime-card add-card" id="addAnime">
+    <div class="plus">+</div>
+  </div>
+
+</div>
 
   </div>
 </div>
