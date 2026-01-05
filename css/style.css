@@ -1,25 +1,44 @@
 body {
   font-family: Arial, sans-serif;
   padding: 20px;
+  background: #f9f9f9;
+}
+
+nav {
+  margin-bottom: 30px;
 }
 
 nav a {
   margin-right: 15px;
   text-decoration: none;
+  color: #333;
   font-weight: bold;
 }
 
-.anime-list {
-  display: flex;
-  gap: 20px;
+nav a:hover {
+  color: #0077ff;
 }
 
-.anime-card {
-  text-align: center;
-  color: black;
+h1 {
+  margin-bottom: 10px;
+}
+
+.example {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
 }
 
 pre {
-  background: #f4f4f4;
+  background: #eee;
   padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+button {
+  padding: 8px 15px;
+  margin-top: 10px;
+  cursor: pointer;
 }
