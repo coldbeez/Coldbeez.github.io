@@ -97,3 +97,28 @@ button {
 button:hover {
   background: #81d4fa;
 }
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav a {
+  position: relative;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: #4fc3f7;
+  transition: width 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
