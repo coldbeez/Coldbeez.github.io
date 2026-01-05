@@ -146,3 +146,21 @@ nav a:hover::after {
 .home-card:hover {
   transform: translateY(-5px);
 }
+
+.anime-card {
+  background: #141414;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.anime-card:hover {
+  background: #1a1a1a;
+}
+
+.code-card h2 {
+  color: #64ffda;
+}
+
+.code-card p {
+  font-family: monospace;
+}
