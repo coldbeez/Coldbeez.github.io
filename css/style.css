@@ -1,1 +1,25 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
 
+nav a {
+  margin-right: 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.anime-list {
+  display: flex;
+  gap: 20px;
+}
+
+.anime-card {
+  text-align: center;
+  color: black;
+}
+
+pre {
+  background: #f4f4f4;
+  padding: 10px;
+}
