@@ -67,8 +67,8 @@ saveBtn.addEventListener("click", () => {
       </div>
 
       <div class="menu-dropdown">
-        <button>Edit</button>
-        <button class="danger">Hapus</button>
+        <button data-action="edit">Edit</button>
+        <button data-action="delete" class="danger">Hapus</button>
       </div>
     </div>
   `;
