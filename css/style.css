@@ -472,6 +472,17 @@ body {
   color: gold;
 }
 
+.anime-card {
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .card-menu {
+    opacity: 1;
+  }
+}
+
+/* ===== MENU TITIK 3 (SIMPLE & STABLE) ===== */
 .card-menu {
   position: absolute;
   top: 10px;
@@ -488,70 +499,19 @@ body {
   border-radius: 50%;
   cursor: pointer;
 
-  background: rgba(0,0,0,0.5);
-  opacity: 0;
-  transition: opacity 0.2s ease, background 0.2s ease;
-}
-
-.anime-card {
-  position: relative;
-}
-
-.anime-card:hover .card-menu {
-  opacity: 1;
-}
-
-.card-menu:hover {
-  background: rgba(255,255,255,0.15);
-}
-
-@media (max-width: 768px) {
-  .card-menu {
-    opacity: 1;
-  }
-}
-
-/* ===== MENU TITIK 3 (FIX & STABLE) ===== */
-.card-menu {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-
-  width: 40px;
-  height: 40px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 22px;
-  border-radius: 50%;
-  cursor: pointer;
-
   background: rgba(0,0,0,0.6);
   color: white;
 
   opacity: 0;
-  pointer-events: none;
-
   transition: opacity 0.2s ease, background 0.2s ease;
 }
 
-/* muncul saat hover card */
+/* muncul HANYA saat hover card */
 .anime-card:hover .card-menu {
   opacity: 1;
-  pointer-events: auto;
 }
 
 /* hover tombol */
 .card-menu:hover {
   background: rgba(255,255,255,0.2);
-}
-
-/* mobile: selalu terlihat */
-@media (max-width: 768px) {
-  .card-menu {
-    opacity: 1;
-    pointer-events: auto;
-  }
 }
