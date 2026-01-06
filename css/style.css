@@ -518,3 +518,9 @@ body {
 .card-menu:hover {
   background: rgba(255,255,255,0.15);
 }
+
+@media (max-width: 768px) {
+  .card-menu {
+    opacity: 1;
+  }
+}
