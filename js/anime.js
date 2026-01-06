@@ -10,9 +10,11 @@ const cancelBtn = document.getElementById("cancelBtn");
 const saveBtn = document.getElementById("saveBtn");
 
 let currentRating = 0;
+let editingCard = null;
 
 /* ===== OPEN MODAL ===== */
 addBtn.addEventListener("click", () => {
+  editingCard = null;
   modal.classList.remove("hidden");
   titleInput.value = "";
   currentRating = 0;
@@ -55,25 +57,34 @@ saveBtn.addEventListener("click", () => {
   const title = titleInput.value.trim();
   if (!title || currentRating === 0) return;
 
-  const cardHTML = `
-    <div class="anime-card">
-      <div class="card-menu">⋮</div>
+  if (editingCard) {
+    // ===== MODE EDIT =====
+    editingCard.querySelector("h3").textContent = title;
+    editingCard.querySelector("p").textContent = `⭐ ${currentRating}`;
+    editingCard = null;
+  } else {
+    // ===== MODE TAMBAH =====
+    const cardHTML = `
+      <div class="anime-card">
+        <div class="card-menu">⋮</div>
 
-      <img src="images/anime/placeholder.jpg">
+        <img src="images/anime/placeholder.jpg">
 
-      <div class="card-body">
-        <h3>${title}</h3>
-        <p>⭐ ${currentRating}</p>
+        <div class="card-body">
+          <h3>${title}</h3>
+          <p>⭐ ${currentRating}</p>
+        </div>
+
+        <div class="menu-dropdown">
+          <button data-action="edit">Edit</button>
+          <button data-action="delete" class="danger">Hapus</button>
+        </div>
       </div>
+    `;
 
-      <div class="menu-dropdown">
-        <button data-action="edit">Edit</button>
-        <button data-action="delete" class="danger">Hapus</button>
-      </div>
-    </div>
-  `;
+    grid.insertAdjacentHTML("beforeend", cardHTML);
+  }
 
-  grid.insertAdjacentHTML("beforeend", cardHTML);
   modal.classList.add("hidden");
 });
 
@@ -107,26 +118,26 @@ document.addEventListener("click", e => {
 
   const card = actionBtn.closest(".anime-card");
 
+  /* ===== HAPUS ===== */
   if (actionBtn.dataset.action === "delete") {
     card.remove();
   }
 
+  /* ===== EDIT ===== */
   if (actionBtn.dataset.action === "edit") {
     const titleEl = card.querySelector("h3");
     const ratingEl = card.querySelector("p");
 
-    const newTitle = prompt("Edit judul anime:", titleEl.textContent);
-    if (!newTitle) return;
-
-    let newRating = prompt(
-      "Edit rating (1–10, bisa 0.5):",
+    // isi modal dengan data card
+    titleInput.value = titleEl.textContent;
+    currentRating = parseFloat(
       ratingEl.textContent.replace("⭐", "")
     );
 
-    newRating = parseFloat(newRating);
-    if (isNaN(newRating) || newRating <= 0 || newRating > 10) return;
+    updateStars();
 
-    titleEl.textContent = newTitle;
-    ratingEl.textContent = `⭐ ${newRating}`;
+    editingCard = card; // PENTING
+    modal.classList.remove("hidden");
   }
 });
+
