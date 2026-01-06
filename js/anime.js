@@ -164,15 +164,16 @@ saveBtn.addEventListener("click", () => {
     const anime = animeList.find(a => a.id === editingCard);
     anime.title = title;
     anime.rating = currentRating;
+    anime.image = currentImage; // ⬅️ penting
     editingCard = null;
   } else {
     animeList.push({
-    id: Date.now(),
-    title,
-    rating: currentRating,
-    image: currentImage
-  });
-
+      id: Date.now(),
+      title,
+      rating: currentRating,
+      image: currentImage
+    });
+  }
 
   localStorage.setItem("animeList", JSON.stringify(animeList));
   modal.classList.add("hidden");
