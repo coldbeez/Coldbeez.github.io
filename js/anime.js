@@ -1,3 +1,66 @@
+const imagePicker = document.getElementById("imagePicker");
+const imagePreview = document.getElementById("imagePreview");
+const imageFileInput = document.getElementById("animeImageFile");
+const imageUrlInput = document.getElementById("animeImageUrl");
+const resetImageBtn = document.getElementById("resetImage");
+
+let currentImage = "images/anime/placeholder.jpg";
+
+imagePicker.addEventListener("click", () => {
+  imageFileInput.click();
+});
+
+imageFileInput.addEventListener("change", () => {
+  const file = imageFileInput.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    currentImage = reader.result;
+    imagePreview.src = currentImage;
+  };
+  reader.readAsDataURL(file);
+});
+
+imageUrlInput.addEventListener("input", () => {
+  const url = imageUrlInput.value.trim();
+  if (!url) return;
+
+  currentImage = url;
+  imagePreview.src = url;
+});
+
+imagePicker.addEventListener("dragover", e => {
+  e.preventDefault();
+  imagePicker.style.borderColor = "#8ec5fc";
+});
+
+imagePicker.addEventListener("dragleave", () => {
+  imagePicker.style.borderColor = "#444";
+});
+
+imagePicker.addEventListener("drop", e => {
+  e.preventDefault();
+  imagePicker.style.borderColor = "#444";
+
+  const file = e.dataTransfer.files[0];
+  if (!file || !file.type.startsWith("image")) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    currentImage = reader.result;
+    imagePreview.src = currentImage;
+  };
+  reader.readAsDataURL(file);
+});
+
+resetImageBtn.addEventListener("click", () => {
+  currentImage = "images/anime/placeholder.jpg";
+  imagePreview.src = currentImage;
+  imageFileInput.value = "";
+  imageUrlInput.value = "";
+});
+
 let animeList = JSON.parse(localStorage.getItem("animeList")) || [];
 
 const grid = document.getElementById("animeGrid");
@@ -101,7 +164,7 @@ saveBtn.addEventListener("click", () => {
       id: Date.now(),
       title,
       rating: currentRating,
-      image: "images/anime/placeholder.jpg"
+      image: currentimage
     });
   }
 
