@@ -1,3 +1,5 @@
+let animeList = JSON.parse(localStorage.getItem("animeList")) || [];
+
 const grid = document.getElementById("animeGrid");
 const addBtn = document.getElementById("addAnime");
 
@@ -11,6 +13,34 @@ const saveBtn = document.getElementById("saveBtn");
 
 let currentRating = 0;
 let editingCard = null;
+
+function renderAnime() {
+  grid.innerHTML = "";
+
+  animeList.forEach(anime => {
+    const card = document.createElement("div");
+    card.className = "anime-card";
+    card.dataset.id = anime.id;
+
+    card.innerHTML = `
+      <div class="card-menu">⋮</div>
+
+      <img src="${anime.image}">
+
+      <div class="card-body">
+        <h3>${anime.title}</h3>
+        <p>⭐ ${anime.rating}</p>
+      </div>
+
+      <div class="menu-dropdown">
+        <button data-action="edit">Edit</button>
+        <button data-action="delete" class="danger">Hapus</button>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
 
 /* ===== OPEN MODAL ===== */
 addBtn.addEventListener("click", () => {
@@ -58,29 +88,29 @@ saveBtn.addEventListener("click", () => {
   if (!title || currentRating === 0) return;
 
   if (editingCard) {
+    const anime = animeList.find(a => a.id === editingCard);
+    anime.title = title;
+    anime.rating = currentRating;
+    editingCard = null;
+  } else {
+    animeList.push({
+      id: Date.now(),
+      title,
+      rating: currentRating,
+      image: "images/anime/placeholder.jpg"
+    });
+  }
+
+  localStorage.setItem("animeList", JSON.stringify(animeList));
+  modal.classList.add("hidden");
+  renderAnime();
+});
+
     // ===== MODE EDIT =====
     editingCard.querySelector("h3").textContent = title;
     editingCard.querySelector("p").textContent = `⭐ ${currentRating}`;
     editingCard = null;
   } else {
-    // ===== MODE TAMBAH =====
-    const cardHTML = `
-      <div class="anime-card">
-        <div class="card-menu">⋮</div>
-
-        <img src="images/anime/placeholder.jpg">
-
-        <div class="card-body">
-          <h3>${title}</h3>
-          <p>⭐ ${currentRating}</p>
-        </div>
-
-        <div class="menu-dropdown">
-          <button data-action="edit">Edit</button>
-          <button data-action="delete" class="danger">Hapus</button>
-        </div>
-      </div>
-    `;
 
     grid.insertAdjacentHTML("beforeend", cardHTML);
   }
@@ -120,24 +150,25 @@ document.addEventListener("click", e => {
 
   /* ===== HAPUS ===== */
   if (actionBtn.dataset.action === "delete") {
-    card.remove();
-  }
+  const id = Number(card.dataset.id);
+
+  animeList = animeList.filter(a => a.id !== id);
+  localStorage.setItem("animeList", JSON.stringify(animeList));
+
+  renderAnime();
+}
 
   /* ===== EDIT ===== */
   if (actionBtn.dataset.action === "edit") {
-    const titleEl = card.querySelector("h3");
-    const ratingEl = card.querySelector("p");
+  const id = Number(card.dataset.id);
+  const anime = animeList.find(a => a.id === id);
 
-    // isi modal dengan data card
-    titleInput.value = titleEl.textContent;
-    currentRating = parseFloat(
-      ratingEl.textContent.replace("⭐", "")
-    );
+  modal.classList.remove("hidden");
+  titleInput.value = anime.title;
+  currentRating = anime.rating;
+  updateStars();
 
-    updateStars();
+  editingCard = id;
+}
 
-    editingCard = card; // PENTING
-    modal.classList.remove("hidden");
-  }
-});
-
+renderAnime();
