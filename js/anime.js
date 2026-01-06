@@ -115,6 +115,12 @@ addBtn.addEventListener("click", () => {
   titleInput.value = "";
   currentRating = 0;
   editingCard = null;
+
+  currentImage = "images/anime/placeholder.jpg";
+  imagePreview.src = currentImage;
+  imageFileInput.value = "";
+  imageUrlInput.value = "";
+  
   updateStars();
 });
 
@@ -161,12 +167,12 @@ saveBtn.addEventListener("click", () => {
     editingCard = null;
   } else {
     animeList.push({
-      id: Date.now(),
-      title,
-      rating: currentRating,
-      image: currentimage
-    });
-  }
+    id: Date.now(),
+    title,
+    rating: currentRating,
+    image: currentImage
+  });
+
 
   localStorage.setItem("animeList", JSON.stringify(animeList));
   modal.classList.add("hidden");
@@ -206,14 +212,20 @@ document.addEventListener("click", e => {
     }
 
     if (actionBtn.dataset.action === "edit") {
-      const anime = animeList.find(a => a.id === id);
+    const anime = animeList.find(a => a.id === id);
 
-      modal.classList.remove("hidden");
-      titleInput.value = anime.title;
-      currentRating = anime.rating;
-      editingCard = id;
-      updateStars();
+    modal.classList.remove("hidden");
+    titleInput.value = anime.title;
+    currentRating = anime.rating;
+    editingCard = id;
+
+    currentImage = anime.image;
+    imagePreview.src = currentImage;
+    imageUrlInput.value = "";
+
+    updateStars();
     }
+
 
     return;
   }
