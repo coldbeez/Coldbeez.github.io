@@ -91,7 +91,7 @@ saveBtn.addEventListener("click", () => {
   const title = titleInput.value.trim();
   if (!title || currentRating === 0) return;
 
-  if (editingCard) {
+  if (editingCard !== null) {
     const anime = animeList.find(a => a.id === editingCard);
     anime.title = title;
     anime.rating = currentRating;
@@ -108,18 +108,6 @@ saveBtn.addEventListener("click", () => {
   localStorage.setItem("animeList", JSON.stringify(animeList));
   modal.classList.add("hidden");
   renderAnime();
-});
-
-    // ===== MODE EDIT =====
-    editingCard.querySelector("h3").textContent = title;
-    editingCard.querySelector("p").textContent = `⭐ ${currentRating}`;
-    editingCard = null;
-  } else {
-
-    grid.insertAdjacentHTML("beforeend", cardHTML);
-  }
-
-  modal.classList.add("hidden");
 });
 
 document.addEventListener("click", e => {
