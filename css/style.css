@@ -362,12 +362,20 @@ body {
 /* Dropdown */
 .menu-dropdown {
   position: absolute;
-  top: 28px;
-  right: 8px;
+
+  /* nempel ke tombol ⋮ */
+  top: 46px;
+  right: 10px;
+
   background: #111;
-  border-radius: 6px;
+  border-radius: 8px;
   display: none;
   flex-direction: column;
+
+  min-width: 110px;
+  z-index: 20;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
 }
 
 .menu-dropdown button {
