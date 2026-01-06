@@ -49,19 +49,35 @@
   <!-- ===== MODAL TAMBAH ANIME ===== -->
 <div id="animeModal" class="modal hidden">
   <div class="modal-content">
-    <h2 id="modalTitle">Tambah Anime</h2>
 
-    <label>Judul Anime</label>
-    <input type="text" id="animeTitle" placeholder="Masukkan judul">
+  <h2>Tambah Anime</h2>
 
-    <label>Rating Anime</label>
-    <div id="starRating" class="stars"></div>
-    <p id="ratingValue">Rating: 0</p>
+  <!-- PREVIEW IMAGE -->
+  <div class="image-picker" id="imagePicker">
+    <img id="imagePreview" src="images/anime/placeholder.jpg">
+    <span>Click / Drop / URL</span>
+  </div>
 
-    <div class="modal-actions">
-      <button id="cancelBtn">Batal</button>
-      <button id="saveBtn">Simpan</button>
-    </div>
+  <input type="file" id="animeImageFile" accept="image/*" hidden>
+
+  <input
+    type="text"
+    id="animeImageUrl"
+    placeholder="Tempel URL gambar (opsional)"
+  >
+
+  <button id="resetImage" type="button">Reset Poster</button>
+
+  <label>Judul Anime</label>
+  <input type="text" id="animeTitle">
+
+  <label>Rating Anime</label>
+  <div id="starRating" class="stars"></div>
+  <p id="ratingValue">Rating: 0</p>
+
+  <div class="modal-actions">
+    <button id="cancelBtn">Batal</button>
+    <button id="saveBtn">Simpan</button>
   </div>
 </div>
   
