@@ -101,3 +101,32 @@ document.addEventListener("click", e => {
     dropdown.style.display === "flex" ? "none" : "flex";
 });
 
+document.addEventListener("click", e => {
+  const actionBtn = e.target.closest("[data-action]");
+  if (!actionBtn) return;
+
+  const card = actionBtn.closest(".anime-card");
+
+  if (actionBtn.dataset.action === "delete") {
+    card.remove();
+  }
+
+  if (actionBtn.dataset.action === "edit") {
+    const titleEl = card.querySelector("h3");
+    const ratingEl = card.querySelector("p");
+
+    const newTitle = prompt("Edit judul anime:", titleEl.textContent);
+    if (!newTitle) return;
+
+    let newRating = prompt(
+      "Edit rating (1–10, bisa 0.5):",
+      ratingEl.textContent.replace("⭐", "")
+    );
+
+    newRating = parseFloat(newRating);
+    if (isNaN(newRating) || newRating <= 0 || newRating > 10) return;
+
+    titleEl.textContent = newTitle;
+    ratingEl.textContent = `⭐ ${newRating}`;
+  }
+});
