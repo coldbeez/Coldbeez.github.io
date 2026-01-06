@@ -40,14 +40,18 @@ function renderAnime() {
 
     grid.appendChild(card);
   });
+
+  // ⬇️ TAMBAHKAN CARD +
+  grid.appendChild(addBtn);
 }
+
 
 /* ===== OPEN MODAL ===== */
 addBtn.addEventListener("click", () => {
-  editingCard = null;
   modal.classList.remove("hidden");
   titleInput.value = "";
   currentRating = 0;
+  editingCard = null;
   updateStars();
 });
 
@@ -118,57 +122,55 @@ saveBtn.addEventListener("click", () => {
   modal.classList.add("hidden");
 });
 
-/* ===== MENU ⋮ (EVENT DELEGATION) ===== */
 document.addEventListener("click", e => {
-  const menuBtn = e.target.closest(".card-menu");
 
-  if (!menuBtn) {
+  /* === MENU ⋮ === */
+  const menuBtn = e.target.closest(".card-menu");
+  if (menuBtn) {
+    e.stopPropagation();
+
+    const card = menuBtn.closest(".anime-card");
+    const dropdown = card.querySelector(".menu-dropdown");
+
     document.querySelectorAll(".menu-dropdown").forEach(m => {
-      m.style.display = "none";
+      if (m !== dropdown) m.style.display = "none";
     });
+
+    dropdown.style.display =
+      dropdown.style.display === "flex" ? "none" : "flex";
+
     return;
   }
 
-  e.stopPropagation();
-
-  const card = menuBtn.closest(".anime-card");
-  const dropdown = card.querySelector(".menu-dropdown");
-
-  document.querySelectorAll(".menu-dropdown").forEach(m => {
-    if (m !== dropdown) m.style.display = "none";
-  });
-
-  dropdown.style.display =
-    dropdown.style.display === "flex" ? "none" : "flex";
-});
-
-document.addEventListener("click", e => {
+  /* === EDIT / DELETE === */
   const actionBtn = e.target.closest("[data-action]");
-  if (!actionBtn) return;
+  if (actionBtn) {
+    const card = actionBtn.closest(".anime-card");
+    const id = Number(card.dataset.id);
 
-  const card = actionBtn.closest(".anime-card");
+    if (actionBtn.dataset.action === "delete") {
+      animeList = animeList.filter(a => a.id !== id);
+      localStorage.setItem("animeList", JSON.stringify(animeList));
+      renderAnime();
+    }
 
-  /* ===== HAPUS ===== */
-  if (actionBtn.dataset.action === "delete") {
-  const id = Number(card.dataset.id);
+    if (actionBtn.dataset.action === "edit") {
+      const anime = animeList.find(a => a.id === id);
 
-  animeList = animeList.filter(a => a.id !== id);
-  localStorage.setItem("animeList", JSON.stringify(animeList));
+      modal.classList.remove("hidden");
+      titleInput.value = anime.title;
+      currentRating = anime.rating;
+      editingCard = id;
+      updateStars();
+    }
 
-  renderAnime();
-}
+    return;
+  }
 
-  /* ===== EDIT ===== */
-  if (actionBtn.dataset.action === "edit") {
-  const id = Number(card.dataset.id);
-  const anime = animeList.find(a => a.id === id);
-
-  modal.classList.remove("hidden");
-  titleInput.value = anime.title;
-  currentRating = anime.rating;
-  updateStars();
-
-  editingCard = id;
-}
+  /* === CLICK DI LUAR === */
+  document.querySelectorAll(".menu-dropdown").forEach(m => {
+    m.style.display = "none";
+  });
+});
 
 renderAnime();
